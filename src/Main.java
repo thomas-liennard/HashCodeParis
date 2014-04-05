@@ -3,6 +3,8 @@ package src;
 import java.io.IOException;
 import java.util.List;
 
+import src.thomas.Algo1;
+
 public class Main {
 	public static void main(String[] args) {
 		GraphData data = new GraphData();
@@ -18,9 +20,11 @@ public class Main {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		LessDumbRandomSolution sol=new LessDumbRandomSolution();
-		sol.graph=data;
-		sol.random();
+		//LessDumbRandomSolution sol=new LessDumbRandomSolution();
+		//sol.graph=data;
+		//sol.random();
+		Algo1 algo=new Algo1(data);
+		algo.run();
 	}
 
 }

@@ -1,8 +1,12 @@
 package src.thomas;
 
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import src.GraphData;
 import src.Intersection;
@@ -13,6 +17,7 @@ public class GraphState {
 	GraphData graph;
 	HashMap<Street,StreetInfo> visitedStreetsInfo = new HashMap<Street,StreetInfo>(); 
 	List<VehicleState> vehiclesState=new ArrayList<VehicleState>();
+	
 
 	
 	void init()
@@ -21,12 +26,14 @@ public class GraphState {
 		Intersection start=vertices.get(graph.getStartingPoint());
 		
 		visitedStreetsInfo = new HashMap<Street,StreetInfo>(); 
-		vehiclesState=new ArrayList<VehicleState>();
-		for(VehicleState v:vehiclesState)
+		vehiclesState=new ArrayList<VehicleState>(8);
+		for(int i=0;i<8;i++)
 		{
+			VehicleState v=new VehicleState();
 			v.currentPosition=start;
 			v.currentTime=0;
 			v.path=new ArrayList<PathEdge>();
+			vehiclesState.add(v);
 		}
 		
 	}
@@ -78,6 +85,79 @@ public class GraphState {
 		}
 		
 		return false;
+	}
+	
+	//call djiksttra to help us get back fast to the unexplored wilderness
+	Street djikstraWillSaveUs(Intersection start)
+	{				
+		Set<Intersection> exploredSet=new HashSet<Intersection>();
+		Set<Intersection> openSet=new HashSet<Intersection>();
+		class DjikstraLance
+		{
+			Set<DjikstraVertex> exploredSet=new HashSet<DjikstraVertex>();
+			Set<Intersection> exploredSet2=new HashSet<Intersection>();
+			Set<DjikstraVertex> openSet=new HashSet<DjikstraVertex>();
+			class DjikstraVertex
+			{
+				DjikstraVertex parent;
+				Intersection intersection;
+			}
+			
+			
+			void init(Intersection start)
+			{
+				DjikstraVertex v=new DjikstraVertex();
+				v.parent=null;
+				v.intersection=start;
+				exploredSet.add(v);
+				extendOpenSet(v);
+				
+			}
+			
+			void extendOpenSet(DjikstraVertex v)
+			{
+				for(Street s:v.intersection.getStreetsFrom())
+				{
+					if(!exploredSet1)
+					
+				}
+				
+			}
+		}
+		
+		DjikstraLance lance=new DjikstraLance();
+		lance.init(start);
+		
+		openSet.add(start);
+		
+
+		
+		
+		
+	}
+	void writeToFile(String fn)
+	{
+		PrintWriter writer=null;
+		try {
+			writer = new PrintWriter(fn);
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		writer.println(vehiclesState.size());
+		for(VehicleState vs : vehiclesState)
+		{
+			writer.println(vs.path.size()+1);
+			for(PathEdge e:vs.path)
+			{
+				writer.println(e.begin.getId());
+				
+			}
+			writer.println(vs.currentPosition.getId());
+		}
+		writer.close();
+		
 	}
 
 
