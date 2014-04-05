@@ -5,28 +5,36 @@ public class DFS {
 	/**
 	 * @param args
 	 */
-	Graph g;
-	boolean[] discovered;
-	boolean[] processed;
+	public static int TIMELIMIT = 54000;
+	
+	static int length = 0;
+	static int cost = 0;
+	static boolean finished = false;
+	GraphData g;
 	
 	public DFS() {
-		g= new Graph();
-		discovered = new boolean[200000];
-		for (int i=0;i<discovered.length;i++) {
-			discovered[i]=false;
-			processed[i]=false;
-		}
+		g= new GraphData();
 	}
 	
-	public void dfs(int v) {
-		Intersection vertex;
+	public void dfs(Intersection vertex) {
 		Intersection y;
-		discovered[v]=true;
-		vertex = g.allIntersections.get(v);
+		vertex.discovered=true;
 		
 		for (Street edge : vertex.getStreetsFrom()) {
+			if (finished) break;
 			y = edge.getEnd();
-			if ()
+			if (y.discovered == false) {
+				y.parent = vertex;
+				cost += edge.getCost();
+				length += edge.getLength();
+				
+				if (cost < TIMELIMIT)
+					dfs(y);
+				else {
+					length -= edge.getLength();
+					finished = true;
+				}
+			}
 		}
 	}
 	
