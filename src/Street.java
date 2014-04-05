@@ -2,15 +2,17 @@ package src;
 
 
 public class Street {
-	public Intersection begin;
-	public Intersection end;
-	int cost;
-	int length;
-	boolean oneWay;
+	
+	private Intersection begin;
+	private Intersection end;
+	
+	private boolean oneWay;
+	
+	private int cost;
+	private int length;
 	
 	
 	public Street(Intersection begin, Intersection end, boolean s, int cost, int length) {
-		super();
 		this.begin = begin;
 		this.end = end;
 		this.cost = cost;
@@ -49,7 +51,56 @@ public class Street {
 	public void setOneWay(boolean oneWay) {
 		this.oneWay = oneWay;
 	}
+
 	
 	
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((begin == null) ? 0 : begin.hashCode());
+		result = prime * result + cost;
+		result = prime * result + ((end == null) ? 0 : end.hashCode());
+		result = prime * result + length;
+		result = prime * result + (oneWay ? 1231 : 1237);
+		return result;
+	}
+
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Street other = (Street) obj;
+		if (begin == null) {
+			if (other.begin != null)
+				return false;
+		} else if (!begin.equals(other.begin))
+			return false;
+		if (cost != other.cost)
+			return false;
+		if (end == null) {
+			if (other.end != null)
+				return false;
+		} else if (!end.equals(other.end))
+			return false;
+		if (length != other.length)
+			return false;
+		if (oneWay != other.oneWay)
+			return false;
+		return true;
+	}
+
+
+	@Override
+	public String toString() {
+		return "Street [begin=" + begin + ", end=" + end + ", cost=" + cost
+				+ ", length=" + length + ", oneWay=" + oneWay + "]";
+	}
 
 }
