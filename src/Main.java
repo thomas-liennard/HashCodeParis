@@ -7,7 +7,7 @@ public class Main {
 	public static void main(String[] args) {
 		GraphData data = new GraphData();
 		try {
-			data.loadGraphData("/home/mari/Desktop/HASHLOFT/paris_54000.txt");
+			data.loadGraphData("paris_54000.txt");
 			System.out.println("nbIntersections = "
 					+ data.getAllIntersections().size() + " ==? "
 					+ data.getNbIntersections());
