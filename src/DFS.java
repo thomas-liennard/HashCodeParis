@@ -59,8 +59,11 @@ public class DFS {
 	
 	public void process_edge(Street edge) {
 		cost += edge.getCost();
-		length += edge.getLength();
 		numbers ++;
+		if (!edge.visited) {
+			length += edge.getLength();
+			edge.visited = true;
+		}
 		try {
 			bw.write(edge.getBegin().getId()+"");
 			bw.newLine();
@@ -70,9 +73,17 @@ public class DFS {
 		}
 	}
 	
+	Street select_edge(Intersection vertex) {
+		if (vertex.getStreetsFrom().size() != 0) {
+			
+		}
+	}
+	
 	public void dfs(Intersection vertex) {
 		Intersection y;
 		vertex.discovered=true;
+		
+		Street edge = select_edge(vertex);
 		
 		for (Street edge : vertex.getStreetsFrom()) {
 			if (finished) break;
