@@ -11,6 +11,7 @@ public class Street {
 	private int cost;
 	private int length;
 	
+	float speed;
 	boolean visited;
 	
 	
@@ -21,6 +22,7 @@ public class Street {
 		this.length = length;
 		this.oneWay = s;
 		this.visited = false;
+		this.speed = (float) (length*1.0/cost);
 	}
 	
 	
