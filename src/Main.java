@@ -18,6 +18,9 @@ public class Main {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		LessDumbRandomSolution sol=new LessDumbRandomSolution();
+		sol.graph=data;
+		sol.random();
 	}
 
 }

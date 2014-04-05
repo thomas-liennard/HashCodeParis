@@ -80,52 +80,6 @@ public class Intersection {
 
 	
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + id;
-		long temp;
-		temp = Double.doubleToLongBits(latitude);
-		result = prime * result + (int) (temp ^ (temp >>> 32));
-		temp = Double.doubleToLongBits(longitude);
-		result = prime * result + (int) (temp ^ (temp >>> 32));
-		result = prime * result
-				+ ((streetsFrom == null) ? 0 : streetsFrom.hashCode());
-		result = prime * result
-				+ ((streetsTo == null) ? 0 : streetsTo.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Intersection other = (Intersection) obj;
-		if (id != other.id)
-			return false;
-		if (Double.doubleToLongBits(latitude) != Double
-				.doubleToLongBits(other.latitude))
-			return false;
-		if (Double.doubleToLongBits(longitude) != Double
-				.doubleToLongBits(other.longitude))
-			return false;
-		if (streetsFrom == null) {
-			if (other.streetsFrom != null)
-				return false;
-		} else if (!streetsFrom.equals(other.streetsFrom))
-			return false;
-		if (streetsTo == null) {
-			if (other.streetsTo != null)
-				return false;
-		} else if (!streetsTo.equals(other.streetsTo))
-			return false;
-		return true;
-	}
 
 	@Override
 	public String toString() {
