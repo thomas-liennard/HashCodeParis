@@ -82,7 +82,7 @@ public class GraphData {
 		this.allStreets = allStreets;
 	}
 
-	private void loadGraphData(String path) throws IOException {
+	public void loadGraphData(String path) throws IOException {
 		FileInputStream istream = null;
 
 		// read the other file
@@ -150,22 +150,5 @@ public class GraphData {
 		}
 
 		br.close();
-	}
-
-	// fast test
-	public static void main(String[] args) {
-		GraphData data = new GraphData();
-		try {
-			data.loadGraphData("/home/mari/Desktop/HASHLOFT/paris_54000.txt");
-			System.out.println("nbIntersections = "
-					+ data.getAllIntersections().size() + " ==? "
-					+ data.getNbIntersections());
-			
-			List<Street> streets = data.getAllStreets(); 
-			System.out.println("nbStreets=" + streets.size() + " ==? " + data.getNbOfStreets());
-		
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
 	}
 }

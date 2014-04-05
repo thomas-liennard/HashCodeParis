@@ -13,6 +13,7 @@ public class Intersection {
 	
 	public boolean discovered;
 	public boolean processed;
+	
 	Intersection parent;
 	
 	private List<Street> streetsFrom ;
