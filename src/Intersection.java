@@ -13,11 +13,13 @@ public class Intersection {
 	
 	public boolean discovered;
 	public boolean processed;
+	Intersection parent;
 	
 	private List<Street> streetsFrom ;
 	private List<Street> streetsTo;
 
 	public Intersection(int _id, double _latitude, double _longitude) {
+		this.parent = null;
 		this.discovered = false;
 		this.processed = false;
 		this.id = _id; 
