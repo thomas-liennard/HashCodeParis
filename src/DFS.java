@@ -74,7 +74,7 @@ public class DFS {
 		Intersection y;
 		vertex.discovered=true;
 		
-		for (Street edge : vertex.getStreetsTo()) {
+		for (Street edge : vertex.getStreetsFrom()) {
 			if (finished) break;
 			y = edge.getEnd();
 			if (y.discovered == false) {
@@ -95,8 +95,9 @@ public class DFS {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		DFS d = new DFS();
-		Intersection start = d.g.getAllIntersections().get(4515);
+		Intersection start = d.g.getAllIntersections().get(d.g.getStartingPoint());
 		
+		System.out.println(d.g.getStartingPoint());
 		System.out.println("Streets from: ");
 		for (Street s : start.getStreetsFrom()) {
 			System.out.println(s.getEnd().getId());

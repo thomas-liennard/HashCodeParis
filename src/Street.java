@@ -11,6 +11,8 @@ public class Street {
 	private int cost;
 	private int length;
 	
+	boolean visited;
+	
 	
 	public Street(Intersection begin, Intersection end, boolean s, int cost, int length) {
 		this.begin = begin;
@@ -18,6 +20,7 @@ public class Street {
 		this.cost = cost;
 		this.length = length;
 		this.oneWay = s;
+		this.visited = false;
 	}
 	
 	
