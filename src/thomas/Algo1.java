@@ -22,7 +22,7 @@ public class Algo1 {
 	
 	public void run()
 	{		
-		while(iterate())
+		while(iterate()==true)
 		{
 		}
 		graphState.writeToFile("algo1.txt");
@@ -51,21 +51,9 @@ public class Algo1 {
 		//take one street randomly if stuck
 		if(streetsFrom.size()==0) 
 		{
-			streetsFrom=minV.currentPosition.getStreetsFrom();
-			while(streetsFrom.size()>0)
-			{
-				Street foo=streetsFrom.get(rndgen.nextInt(streetsFrom.size()));
-				//select one randomly, if not good with time remaining test another
-				if(foo.getCost()+minV.currentTime<=graph.getNbOfSeconds())
-				{
-					graphState.moveVehicle(minV, foo);
-					return true;
-				}else
-				{
-					streetsFrom.remove(foo);
-				}
-			}
-			return false;
+			System.out.println("djikstra");
+			return graphState.moveVehicle(minV, graphState.djikstraWillSaveUs(minV.currentPosition));
+			
 		}
 		Street minS=null;
 		int minCosto=1000000;
@@ -77,9 +65,10 @@ public class Algo1 {
 				minS=s;
 			}
 		}
-		System.out.println("foo");
-		graphState.moveVehicle(minV,minS);
-		return true;
+
+		boolean cont=graphState.moveVehicle(minV,minS);
+		System.out.println("continue:"+cont);
+		return cont;
 		
 	}
 	

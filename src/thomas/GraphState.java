@@ -84,7 +84,7 @@ public class GraphState {
 			visitedStreetsInfo.put(s, sinfo);
 		}
 		
-		return false;
+		return true;
 	}
 	
 	//call djiksttra to help us get back fast to the unexplored wilderness
