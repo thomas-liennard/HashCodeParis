@@ -94,13 +94,16 @@ public class GraphState {
 		Set<Intersection> openSet=new HashSet<Intersection>();
 		class DjikstraLance
 		{
-			Set<DjikstraVertex> exploredSet=new HashSet<DjikstraVertex>();
-			Set<Intersection> exploredSet2=new HashSet<Intersection>();
+			Set<Intersection> exploredSet=new HashSet<Intersection>();
 			Set<DjikstraVertex> openSet=new HashSet<DjikstraVertex>();
+			DjikstraVertex finalVertex=null;
+			
 			class DjikstraVertex
 			{
 				DjikstraVertex parent;
+				Street backEdge;
 				Intersection intersection;
+				int cost;
 			}
 			
 			
@@ -108,27 +111,78 @@ public class GraphState {
 			{
 				DjikstraVertex v=new DjikstraVertex();
 				v.parent=null;
+				v.backEdge=null;
 				v.intersection=start;
-				exploredSet.add(v);
+				v.cost=0;
+				exploredSet.add(start);
 				extendOpenSet(v);
 				
 			}
 			
 			void extendOpenSet(DjikstraVertex v)
 			{
+				exploredSet.add(v.intersection);
+				openSet.remove(v);
 				for(Street s:v.intersection.getStreetsFrom())
 				{
-					if(!exploredSet1)
 					
+					Intersection d=null;
+					if(v.intersection==s.getBegin()){
+						d=s.getEnd();
+					} else
+					{
+						d=s.getBegin();
+					}
+					if(!exploredSet.contains(d))
+					{
+						DjikstraVertex vv=new DjikstraVertex();
+						vv.parent=v;
+						vv.intersection=d;
+						vv.cost=v.cost+s.getCost();
+						vv.backEdge=s;
+						openSet.add(vv);
+						//if we hit 
+						if(!visitedStreetsInfo.containsKey(s))
+						{
+							finalVertex=vv;													
+						}
+					}					
+				}				
+			}
+			
+			Street saveUs()
+			{
+				//find the minimal cost vertex in the open set.
+				while(finalVertex==null)
+				{
+					int minCost=10000;
+					DjikstraVertex minVr=null;
+					for(DjikstraVertex vx : openSet)
+					{
+						if(vx.cost<minCost)
+						{
+							minCost=vx.cost;
+							minVr=vx;
+						}
+					}
+					extendOpenSet(minVr);					
 				}
+				//backtrack
+				DjikstraVertex vvv=finalVertex;
+				Street backEdge=null;
+				while(vvv.parent!=null)
+				{
+					backEdge=vvv.backEdge;
+					vvv=vvv.parent;
+				}
+				return backEdge;
 				
 			}
 		}
 		
 		DjikstraLance lance=new DjikstraLance();
 		lance.init(start);
-		
-		openSet.add(start);
+		return lance.saveUs();
 		
 
 		
