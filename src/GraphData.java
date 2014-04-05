@@ -105,7 +105,7 @@ public class GraphData {
 				+ ", nbOfSeconds=" + nbOfSeconds + ", startingPoint="
 				+ startingPoint);
 
-		int id = 1;
+		int id = 0;
 		try {
 			while ((strLine = br.readLine()) != null) {
 				if (strLine.trim().length() != 0) {
@@ -134,12 +134,12 @@ public class GraphData {
 							
 							allStreets.add(s);
 							
-							ibegin.addToStreetsTo(s); 
-							iend.addToStreetsFrom(s); 
+							ibegin.addToStreetsFrom(s); 
+							iend.addToStreetsTo(s); 
 						
 							if(oneway==false) {
-								iend.addToStreetsTo(s); 
-								ibegin.addToStreetsFrom(s); 
+								ibegin.addToStreetsTo(s); 
+								iend.addToStreetsFrom(s); 
 							}
 						}
 					}
