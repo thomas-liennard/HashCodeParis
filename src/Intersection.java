@@ -11,10 +11,15 @@ public class Intersection {
 	private double latitude;
 	private double longitude;
 	
+	public boolean discovered;
+	public boolean processed;
+	
 	private List<Street> streetsFrom ;
 	private List<Street> streetsTo;
 
 	public Intersection(int _id, double _latitude, double _longitude) {
+		this.discovered = false;
+		this.processed = false;
 		this.id = _id; 
 		this.latitude = _latitude; 
 		this.longitude = _longitude; 
